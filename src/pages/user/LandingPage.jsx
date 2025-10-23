@@ -1,13 +1,15 @@
-
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, Zap, Gem, Brain, Mail, Phone, MapPin } from '../../components/icons'
-import Card from '../../components/card'
-import Navbar from '../../components/navbar'
+import { ChevronRight, Zap, Gem, Brain, Mail, Phone, MapPin } from "../../components/icons"
+import Navbar from "../../components/navbar"
+import Modal from "../../components/modal"
+import SidePanel from "../../components/sidepanel"
 
 const LandingPage = () => {
-const [_activeFeature, setActiveFeature] = useState(0)
+  const [_activeFeature, setActiveFeature] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false)
 
   const handleExplore = () => {
     window.location.href = "/cars"
@@ -107,6 +109,21 @@ const [_activeFeature, setActiveFeature] = useState(0)
                   className="px-8 py-4 rounded-full border-2 border-white/30 text-white font-bold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-white/20"
                 >
                   Build & Order
+                </button>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-rose-400 to-pink-500 text-white font-semibold hover:shadow-lg hover:shadow-rose-500/50 transition-all duration-300 transform hover:scale-105"
+                >
+                  Open Modal
+                </button>
+                <button
+                  onClick={() => setIsSidePanelOpen(true)}
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105"
+                >
+                  Open Side Panel
                 </button>
               </div>
             </div>
@@ -392,6 +409,9 @@ const [_activeFeature, setActiveFeature] = useState(0)
           </div>
         </div>
       </footer>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <SidePanel isOpen={isSidePanelOpen} onClose={() => setIsSidePanelOpen(false)} />
     </div>
   )
 }
